@@ -22,7 +22,7 @@ public class Pharmacy {
 
   private String pharmacyName;
   private String pharmacyAddress;
-  private String latitude;
-  private String longitude;
+  private double latitude;
+  private double longitude;
 
 }
