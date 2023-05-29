@@ -12,13 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor // 롬복의 생성자 주입
 public class PharmacyRepositoryService {
+
   private final PharmacyRepository pharmacyRepository;
 
   @Transactional
-  public void updateAddress(Long id, String address){
-    Pharmacy entity = pharmacyRepository.findById(id).orElse(null); // findById가 optional로 되어있어서 null 일때 null로 처리해줌.
+  public void updateAddress(Long id, String address) {
+    Pharmacy entity = pharmacyRepository.findById(id)
+        .orElse(null); // findById가 optional로 되어있어서 null 일때 null로 처리해줌.
 
-    if(Objects.isNull(entity)){ // entity가 null이면 진행할 필요가 없어 로그로 띄운다.
+    if (Objects.isNull(entity)) { // entity가 null이면 진행할 필요가 없어 로그로 띄운다.
       log.error("[PharmacyRepositoryService updateAddress] not fount id: {}", id);
       return;
     }
@@ -27,10 +29,11 @@ public class PharmacyRepositoryService {
   }
 
   // for test -> Dirty Checking을 위해서
-  public void updateAddressWithoutTransaction(Long id, String address){
-    Pharmacy entity = pharmacyRepository.findById(id).orElse(null); // findById가 optional로 되어있어서 null 일때 null로 처리해줌.
+  public void updateAddressWithoutTransaction(Long id, String address) {
+    Pharmacy entity = pharmacyRepository.findById(id)
+        .orElse(null); // findById가 optional로 되어있어서 null 일때 null로 처리해줌.
 
-    if(Objects.isNull(entity)){ // entity가 null이면 진행할 필요가 없어 로그로 띄운다.
+    if (Objects.isNull(entity)) { // entity가 null이면 진행할 필요가 없어 로그로 띄운다.
       log.error("[PharmacyRepositoryService updateAddress] not fount id: {}", id);
       return;
     }
