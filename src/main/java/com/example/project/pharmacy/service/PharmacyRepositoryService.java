@@ -2,11 +2,13 @@ package com.example.project.pharmacy.service;
 
 import com.example.project.pharmacy.entity.Pharmacy;
 import com.example.project.pharmacy.repository.PharmacyRepository;
+import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Slf4j // 롬복의 로그
 @Service
@@ -14,6 +16,25 @@ import org.springframework.transaction.annotation.Transactional;
 public class PharmacyRepositoryService {
 
   private final PharmacyRepository pharmacyRepository;
+
+  // self invocation test
+  public void bar(List<Pharmacy> pharmacyList){
+    log.info("bar CurrentTransactionName: "+ TransactionSynchronizationManager.getCurrentTransactionName());
+    foo(pharmacyList); // 약국 리스트를 받아 foo라는 메소드에 전달
+  }
+
+  // self inovocation test
+  @Transactional
+  public void foo(List<Pharmacy> pharmacyList){
+    log.info("foo CurrentTransactionName: " + TransactionSynchronizationManager.getCurrentTransactionName());
+    pharmacyList.forEach(pharmacy -> {
+      pharmacyRepository.save(pharmacy); // 저장 후
+      throw new RuntimeException("error"); // 에러발생 // @Transactional 에서 exception 발생하면 자동으로 롤백하는 정책을 가짐. -> 이 코드에서는 정상적으로 트랜잭션이 실행되면 롤백이 되야함.(exception처리를 했기 때문)
+    });
+  }
+
+  // read only test
+
 
   @Transactional
   public void updateAddress(Long id, String address) {
