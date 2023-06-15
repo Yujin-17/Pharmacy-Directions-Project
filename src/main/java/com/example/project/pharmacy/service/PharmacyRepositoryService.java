@@ -33,7 +33,6 @@ public class PharmacyRepositoryService {
     });
   }
 
-  // read only test
 
 
   @Transactional
@@ -60,6 +59,11 @@ public class PharmacyRepositoryService {
     }
 
     entity.changePharmacyAddress(address); // entity값을 정상적으로 찾아왔으면, 주소를 변경
+  }
+
+  @Transactional(readOnly = true)
+  public List<Pharmacy> findAll() {
+      return pharmacyRepository.findAll();
   }
 
 }

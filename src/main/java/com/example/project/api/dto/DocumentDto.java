@@ -17,6 +17,6 @@ public class DocumentDto {
   private double latitude;
 
   @JsonProperty("x")  // 경도
-  private double longtitude;
+  private double longitude;
 
 }
