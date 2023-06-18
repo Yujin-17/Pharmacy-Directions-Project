@@ -2,6 +2,7 @@ package com.example.project.direction.service;
 
 import com.example.project.api.dto.DocumentDto;
 import com.example.project.direction.entity.Direction;
+import com.example.project.direction.repository.DirectionRepository;
 import com.example.project.pharmacy.dto.PharmacyDto;
 import com.example.project.pharmacy.service.PharmacySearchService;
 import java.util.Collection;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 @Slf4j
 @Service
@@ -22,6 +25,13 @@ public class DirectionService {
   private static final int MAX_SEARCH_COUNT = 3; // 약국 최대 검색 갯수
   private static final double RADIUS_KM = 10.0; // 반경 10 km
   private final PharmacySearchService pharmacySearchService;
+  private final DirectionRepository directionRepository;
+
+  @Transactional
+  public List<Direction> saveAll(List<Direction> directionList){
+    if(CollectionUtils.isEmpty(directionList)) return Collections.emptyList();
+    return directionRepository.saveAll(directionList);
+  }
 
   public List<Direction> buildDirectionList(DocumentDto documentDto) {
 
