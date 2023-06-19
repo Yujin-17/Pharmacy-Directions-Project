@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 
+
 class KakaoAddressSearchServiceRetryTest extends AbstractIntegrationContainerBaseTest { // 통합 테스트 환경에서 진행
 
     @Autowired

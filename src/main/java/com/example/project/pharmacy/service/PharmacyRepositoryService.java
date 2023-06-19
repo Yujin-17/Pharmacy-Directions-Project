@@ -2,13 +2,16 @@ package com.example.project.pharmacy.service;
 
 import com.example.project.pharmacy.entity.Pharmacy;
 import com.example.project.pharmacy.repository.PharmacyRepository;
-import java.util.List;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 @Slf4j // 롬복의 로그
 @Service

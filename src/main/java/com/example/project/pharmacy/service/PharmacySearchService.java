@@ -27,12 +27,12 @@ public class PharmacySearchService {
         .collect(Collectors.toList());
   }
 
-  private PharmacyDto convertToPharmacyDto(Pharmacy pharmacy){
+  private PharmacyDto convertToPharmacyDto(Pharmacy pharmacy) {
 
     return PharmacyDto.builder()
         .id(pharmacy.getId())
-        .pharmacyAddress(pharmacy.getPharmacyAddress())
         .pharmacyName(pharmacy.getPharmacyName())
+        .pharmacyAddress(pharmacy.getPharmacyAddress())
         .latitude(pharmacy.getLatitude())
         .longitude(pharmacy.getLongitude())
         .build();
