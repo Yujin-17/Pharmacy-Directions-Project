@@ -17,7 +17,7 @@ import org.springframework.util.CollectionUtils;
 
 
 @Slf4j
-@Service 
+@Service
 @RequiredArgsConstructor
 public class DirectionService {
 
