@@ -35,7 +35,7 @@ spring:
     port: 6379
   jpa:
     hibernate:
-      ddl-auto: validate # 로컬, 개발 환경에서만 create사용.   운영 환경에 배포 할 시에는 none 이나 validate 옵션 사용. (drop의 위험성)
+      ddl-auto: create # 로컬, 개발 환경에서만 create사용.   운영 환경에 배포 할 시에는 none 이나 validate 옵션 사용. (drop의 위험성)
 
 ---
 
