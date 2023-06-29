@@ -46,7 +46,7 @@ public class PharmacyRecommendationService {
 
   private OutputDto convertToOutputDto(Direction direction){
     return OutputDto.builder()
-        .PharmacyAddress(direction.getTargetPharmacyName())
+        .PharmacyName(direction.getTargetPharmacyName())
         .PharmacyAddress(direction.getTargetAddress())
         .directionUrl("todo")
         .roadViewUrl("todo")

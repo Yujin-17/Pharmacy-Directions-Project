@@ -20,7 +20,7 @@ public class FormController {
     return "main";
   }
 
-  @PostMapping("/")
+  @PostMapping("/search")
   public ModelAndView postDirection(@ModelAttribute InputDto inputDto){
 
     ModelAndView modelAndView = new ModelAndView();
