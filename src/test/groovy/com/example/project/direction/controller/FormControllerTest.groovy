@@ -7,15 +7,17 @@ import org.springframework.test.web.servlet.MockMvcBuilder
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+
 
 class FormControllerTest extends Specification {
 
     private MockMvc mockMvc
-    private PharmacyRecommendationService pharmacyRecommendationService
+    private PharmacyRecommendationService pharmacyRecommendationService = Mock()
     private List<OutputDto> outputDtoList
 
     def setup(){
@@ -55,9 +57,9 @@ class FormControllerTest extends Specification {
                 .param("address", inputAddress))
 
         then:
-        1 * pharmacyRecommendationService.recommendationPharmacyList(argument -> { // recommendationPharmacyList라는 메소드가 호출된 횟수 (1 * 이기 때문에 한번 호출 체크)
+        1 * pharmacyRecommendationService.recommendationPharmacyList(argument -> {
             assert argument == inputAddress // mock 객체의 argument 검증
-        }) >> outputDtoList // 한번만 호출되야함
+        }) >> outputDtoList
 
         resultActions
                 .andExpect(status().isOk())
